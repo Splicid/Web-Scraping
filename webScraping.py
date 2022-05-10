@@ -15,9 +15,11 @@ page = requests.get(URL)
 soup = BeautifulSoup(page.content, "html.parser")
 results = soup.find(id="pricing")
 
-for num in range(0,9):
-    card_price = soup.find('a',{"id":"hypProductH2_" + str(num)})
-    print(card_price.text.strip())
+for num in soup.find_all('a',{"data-category":"Graphics Cards"}):
+    print(num.text.strip())
+
+for price in soup.find_all('span', {"itemprop":"price"}):
+    print(price.text.strip())
 
 
 # root = Tk()
